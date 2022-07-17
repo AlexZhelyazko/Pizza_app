@@ -3,6 +3,7 @@ import { Header } from './components/Header';
 import { PizzaBlock } from './components/PizzaBlock';
 import { Sort } from './components/Sort';
 import './scss/app.scss'
+import pizzaData from './assets/data/data.json'
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            <PizzaBlock />
+            <PizzaBlock {...pizzaData} />
           </div>
         </div>
       </div>

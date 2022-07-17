@@ -4,7 +4,6 @@ const categories = ['Все', 'Мясные', 'Вегетарианская', '�
 
 export const Categories = () => {
   const [activeCategory, setActiveCategory]  = useState(0)
-  console.log(activeCategory);
     return <div className="categories">
     <ul>
       {categories.map((el, index) => {
