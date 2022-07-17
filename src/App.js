@@ -1,6 +1,6 @@
 import { Categories } from './components/Categories';
 import { Header } from './components/Header';
-import { PizzaBlock } from './components/PizzaBlock';
+import { PizzaBlock } from './pages/pizzaPage/PizzaBlock';
 import { Sort } from './components/Sort';
 import './scss/app.scss'
 import pizzaData from './assets/data/data.json'

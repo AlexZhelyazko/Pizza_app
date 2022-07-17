@@ -1,16 +1,31 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { Skeleton } from "../../components/SkeletonLoader/Skeleton"
 
 export const PizzaBlock =  (props) => {
   const pizzaType = ['тонкое', 'традиционное']
+  const [pizzas, setPizzas] = useState([])
   const [pizzaCount, setPizzaCount] = useState(0)
   const [activePizzaType, setActivePizzaType] = useState(0)
   const [activePizzaSize, setActivePizzaSize] = useState(0)
+  const [loading, setIsLoading] = useState(true)
   const onAddButtonClick = () => {
       setPizzaCount(pizzaCount+1)
     }
-    
+  
+  useEffect(() => {
+    fetch('https://62d45072cd960e45d456797d.mockapi.io/pizza').then((response) => {
+      return response.json()
+    }).then((data) => {
+      setPizzas(data)
+      setIsLoading(false)
+    }) 
+  }, [])  
+  const fakeArr = [...new Array(8)]
+  console.log(fakeArr);
   return <>
-    {props.pizzas.map((el, index) => {
+    {loading 
+    ? fakeArr.map(() => <Skeleton/> )
+    : pizzas.map((el, index) => {
       return <div className="pizza-block" key={index}>
       <img className="pizza-block__image" src={el.imageUrl} alt="Pizza" />
       <h4 className="pizza-block__title">{el.name}</h4>
