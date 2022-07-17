@@ -7,7 +7,7 @@ export const Categories = () => {
     return <div className="categories">
     <ul>
       {categories.map((el, index) => {
-       return <li className = {activeCategory===index ? 'active' : ''} onClick={() => setActiveCategory(index)}>{el}</li>
+       return <li key={index} className = {activeCategory===index ? 'active' : ''} onClick={() => setActiveCategory(index)}>{el}</li>
       })}
     </ul>
   </div>

@@ -11,18 +11,18 @@ export const PizzaBlock =  (props) => {
     
   return <>
     {props.pizzas.map((el, index) => {
-      return <div className="pizza-block">
+      return <div className="pizza-block" key={index}>
       <img className="pizza-block__image" src={el.imageUrl} alt="Pizza" />
       <h4 className="pizza-block__title">{el.name}</h4>
       <div className="pizza-block__selector">
         <ul>
           {el.types.map((type, typeInd) => {
-            return <li onClick={() => setActivePizzaType(typeInd)} className={activePizzaType === typeInd ? 'active' : ''}>{pizzaType[typeInd]}</li>
+            return <li key={typeInd} onClick={() => setActivePizzaType(typeInd)} className={activePizzaType === typeInd ? 'active' : ''}>{pizzaType[typeInd]}</li>
           })}
         </ul>
         <ul>
           {el.sizes.map((size, sizeInd) => {
-            return <li onClick={() => setActivePizzaSize(sizeInd)} className={activePizzaSize === sizeInd ? 'active' : ''}>{size}</li>
+            return <li key={sizeInd} onClick={() => setActivePizzaSize(sizeInd)} className={activePizzaSize === sizeInd ? 'active' : ''}>{size}</li>
           })}
         </ul>
       </div>
