@@ -30,3 +30,16 @@
     }
   }
 }
+
+@media all and (max-width: 640px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+  }
+  .header__logo{
+    margin-bottom: 20px;
+  }
+  .header {
+    padding: 40px 0 10px 0;
+  }
+}

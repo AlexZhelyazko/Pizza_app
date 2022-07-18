@@ -1,10 +1,8 @@
-import { Categories } from './components/Categories';
 import { Header } from './components/Header';
 import { PizzaBlock } from './pages/pizzaPage/PizzaBlock';
-import { Sort } from './components/Sort';
 import './scss/app.scss'
-import pizzaData from './assets/data/data.json'
 import { Routes, Route } from 'react-router-dom';
+import { NotFound } from './components/NotFound';
 
 function App() {
   return (
@@ -12,6 +10,7 @@ function App() {
       <Header />
       <Routes>
         <Route path='/' element={<PizzaBlock />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </div>
   );

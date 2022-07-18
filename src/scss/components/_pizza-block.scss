@@ -1,7 +1,6 @@
 @import '../_variables';
 
 .pizza-block {
-  width: 280px;
   text-align: center;
   margin-bottom: 65px;
 
@@ -48,6 +47,14 @@
           border-radius: 5px;
           cursor: auto;
         }
+      }
+    }
+    @media all and (max-width: 770px) {
+      .pizza-block{
+        align-self: center;
+        text-align: center;
+        margin-bottom: 50px;
+        width: 60vw;
       }
     }
   }
