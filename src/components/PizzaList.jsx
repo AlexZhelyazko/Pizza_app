@@ -22,7 +22,7 @@ const pizzaType = ['тонкое', 'традиционное']
     }) 
   }, [activeCategory, activeSort])  
   const fakeArr = [...new Array(8)]
-  console.log(fakeArr);
+
   return <>
     {loading 
     ? fakeArr.map(() => <Skeleton/> )
