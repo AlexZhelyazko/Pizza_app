@@ -13,6 +13,7 @@ const pizzaType = ['тонкое', 'традиционное']
     }
   
   useEffect(() => {
+    setIsLoading(true)
     fetch(`https://62d45072cd960e45d456797d.mockapi.io/pizza?category=${activeCategory > 0 ? activeCategory : ''}&sortBy=${sorts[activeSort].queryParamName}`).then((response) => {
       return response.json()
     }).then((data) => {
