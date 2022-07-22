@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { Skeleton } from "./SkeletonLoader/Skeleton"
 
-export const PizzaList = () => {
+export const PizzaList = ({activeSort, activeCategory, sorts}) => {
 const pizzaType = ['тонкое', 'традиционное']
   const [pizzas, setPizzas] = useState([])
   const [pizzaCount, setPizzaCount] = useState(0)
@@ -13,13 +13,13 @@ const pizzaType = ['тонкое', 'традиционное']
     }
   
   useEffect(() => {
-    fetch('https://62d45072cd960e45d456797d.mockapi.io/pizza').then((response) => {
+    fetch(`https://62d45072cd960e45d456797d.mockapi.io/pizza?category=${activeCategory > 0 ? activeCategory : ''}&sortBy=${sorts[activeSort].queryParamName}`).then((response) => {
       return response.json()
     }).then((data) => {
       setPizzas(data)
       setIsLoading(false)
     }) 
-  }, [])  
+  }, [activeCategory, activeSort])  
   const fakeArr = [...new Array(8)]
   console.log(fakeArr);
   return <>
