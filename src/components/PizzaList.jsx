@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
+import { SearchContext } from "../App"
 import { Skeleton } from "./SkeletonLoader/Skeleton"
 
 export const PizzaList = ({activeSort, activeCategory, sorts}) => {
-const pizzaType = ['тонкое', 'традиционное']
+  const pizzaType = ['тонкое', 'традиционное']
+  const {value} = useContext(SearchContext)
   const [pizzas, setPizzas] = useState([])
   const [pizzaCount, setPizzaCount] = useState(0)
   const [activePizzaType, setActivePizzaType] = useState(0)
@@ -14,13 +16,14 @@ const pizzaType = ['тонкое', 'традиционное']
   
   useEffect(() => {
     setIsLoading(true)
-    fetch(`https://62d45072cd960e45d456797d.mockapi.io/pizza?category=${activeCategory > 0 ? activeCategory : ''}&sortBy=${sorts[activeSort].queryParamName}`).then((response) => {
+    console.log(value);
+    fetch(`https://62d45072cd960e45d456797d.mockapi.io/pizza?filter=${value}${activeCategory>0 ? `&category=${activeCategory}` : ''}&sortBy=${sorts[activeSort].queryParamName}`).then((response) => {
       return response.json()
     }).then((data) => {
       setPizzas(data)
       setIsLoading(false)
     }) 
-  }, [activeCategory, activeSort])  
+  }, [activeCategory, activeSort, value])  
   const fakeArr = [...new Array(8)]
 
   return <>
