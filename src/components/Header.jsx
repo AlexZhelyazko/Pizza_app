@@ -2,10 +2,16 @@ import pizzaLogo from '../assets/images/pizza-logo.svg'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setValue } from '../redux/slices/filterSlice'
+import { useRef } from 'react'
 
 export const Header = () => {
   const dispatch = useDispatch()
   let searchValue = useSelector((state) => state.filterSlice.value)
+  let inputRef = useRef()
+  const onClearClick = () => {
+    inputRef.current.focus()
+    dispatch(setValue(''))
+  }
     return (
         <div className="header">
         <div className="container">
@@ -17,8 +23,12 @@ export const Header = () => {
             </div>
           </div>
           <div>
-            <input type="text" value={searchValue} onChange={(e) => dispatch(setValue(e.currentTarget.value))}/>
-            <button onClick={() => dispatch(setValue(''))}>Click</button>
+            <input
+              ref={inputRef}
+              type="text"
+              value={searchValue} 
+              onChange={(e) => dispatch(setValue(e.currentTarget.value))}/>
+            <button onClick={() => onClearClick()}>Click</button>
           </div>
           <div className="header__cart">
             <Link to='/cart' className="button button--cart">
