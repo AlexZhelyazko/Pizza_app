@@ -3,14 +3,31 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { setValue } from '../redux/slices/filterSlice'
 import { useRef } from 'react'
+import debounce from 'lodash.debounce'
+import { useCallback } from 'react'
+import { useState } from 'react'
 
 export const Header = () => {
   const dispatch = useDispatch()
+  const [localValue, setLocalValue] = useState('')
   let searchValue = useSelector((state) => state.filterSlice.value)
   let inputRef = useRef()
+  
+  const debounceTimeOut = useCallback(
+    debounce((str) => {
+      dispatch(setValue(str))
+    }, 300), []
+  )
+
+  const onInputChange = (event) => {
+    debounceTimeOut(event.currentTarget.value)
+    setLocalValue(event.currentTarget.value)
+  }
+  
   const onClearClick = () => {
-    inputRef.current.focus()
+    setLocalValue('')
     dispatch(setValue(''))
+    inputRef.current.focus()
   }
     return (
         <div className="header">
@@ -26,8 +43,8 @@ export const Header = () => {
             <input
               ref={inputRef}
               type="text"
-              value={searchValue} 
-              onChange={(e) => dispatch(setValue(e.currentTarget.value))}/>
+              value={localValue} 
+              onChange={(e) => onInputChange(e)}/>
             <button onClick={() => onClearClick()}>Click</button>
           </div>
           <div className="header__cart">
