@@ -1,10 +1,13 @@
 import { useState } from "react"
+import { useSelector, useDispatch } from "react-redux"
+import { setActiveSort } from "../redux/slices/filterSlice"
 
-export const Sort = ({setSort, activeSort, sorts}) => {
+export const Sort = ({sorts}) => {
   const [visible, setIsVisible] = useState(false)
-
+  let activeSort = useSelector((state) => state.filterSlice.activeSort)
+  const dispatch = useDispatch()
   function onSortClick (index) {
-    setSort(index)
+    dispatch(setActiveSort(index))
     setIsVisible (false)
   }
     return (

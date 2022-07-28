@@ -1,8 +1,11 @@
 import { useContext, useEffect, useState } from "react"
+import { useSelector } from "react-redux/es/exports"
 import { SearchContext } from "../App"
 import { Skeleton } from "./SkeletonLoader/Skeleton"
 
-export const PizzaList = ({activeSort, activeCategory, sorts}) => {
+export const PizzaList = ({sorts}) => {
+  let activeCategory = useSelector((state) => state.filterSlice.activeCategory)
+  let activeSort = useSelector((state) => state.filterSlice.activeSort)
   const pizzaType = ['тонкое', 'традиционное']
   const {value} = useContext(SearchContext)
   const [pizzas, setPizzas] = useState([])
