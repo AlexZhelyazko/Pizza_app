@@ -1,13 +1,13 @@
-import { useContext, useEffect, useState } from "react"
+import axios from "axios"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux/es/exports"
-import { SearchContext } from "../App"
 import { Skeleton } from "./SkeletonLoader/Skeleton"
 
 export const PizzaList = ({sorts}) => {
   let activeCategory = useSelector((state) => state.filterSlice.activeCategory)
   let activeSort = useSelector((state) => state.filterSlice.activeSort)
+  let searchValue = useSelector((state) => state.filterSlice.value)
   const pizzaType = ['тонкое', 'традиционное']
-  const {value} = useContext(SearchContext)
   const [pizzas, setPizzas] = useState([])
   const [pizzaCount, setPizzaCount] = useState(0)
   const [activePizzaType, setActivePizzaType] = useState(0)
@@ -19,14 +19,11 @@ export const PizzaList = ({sorts}) => {
   
   useEffect(() => {
     setIsLoading(true)
-    console.log(value);
-    fetch(`https://62d45072cd960e45d456797d.mockapi.io/pizza?filter=${value}${activeCategory>0 ? `&category=${activeCategory}` : ''}&sortBy=${sorts[activeSort].queryParamName}`).then((response) => {
-      return response.json()
-    }).then((data) => {
-      setPizzas(data)
+    axios.get(`https://62d45072cd960e45d456797d.mockapi.io/pizza?filter=${searchValue}${activeCategory>0 ? `&category=${activeCategory}` : ''}&sortBy=${sorts[activeSort].queryParamName}`).then((response) => {
+      setPizzas(response.data)
       setIsLoading(false)
-    }) 
-  }, [activeCategory, activeSort, value])  
+    })
+  }, [activeCategory, activeSort, searchValue])  
   const fakeArr = [...new Array(8)]
 
   return <>
